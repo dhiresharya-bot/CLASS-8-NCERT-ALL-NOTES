@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL IN Class 8 Notes</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f2f7ff}
+header{background:#222;color:white;text-align:center;padding:20px}
+.subjects{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:15px;background:white}
+.subjects button,.chapter-buttons button{padding:12px 18px;border:none;border-radius:8px;background:#2196f3;color:white;font-size:16px;cursor:pointer}
+.subjects button:hover,.chapter-buttons button:hover{background:#1976d2}
+.chapter-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:15px;background:#eaf3ff}
+.chapter-buttons button{font-size:14px;padding:10px 14px}
+.notes{padding:20px}.notes h2{text-align:center}.notes h3{color:#1976d2}.notes p,.notes li{line-height:1.7}
+footer{text-align:center;padding:15px;background:#222;color:white;margin-top:20px}
+</style>
+</head>
+<body>
+<header><h1>📚 Class 8 Notes</h1></header>
+<div class="subjects">
+<button onclick="showSubject('Maths')">📐 Maths</button>
+<button onclick="showSubject('English')">📖 English</button>
+<button onclick="showSubject('Hindi')">🪔 Hindi</button>
+</div>
+<div id="chapterButtons" class="chapter-buttons"></div>
+<div class="notes"><h2 id="subjectTitle"></h2><div id="notes"><p>ऊपर से कोई Subject चुनें।</p></div></div>
+<footer>created by sushant</footer>
+<script>
+const mathsChapters={
+"A Square and a Cube":`<h3>1. A Square and a Cube</h3><p>Square का मतलब किसी संख्या को उसी संख्या से multiply करना है।</p><p>उदाहरण: 5² = 5 × 5 = 25</p><p>Cube में किसी संख्या को तीन बार multiply करते हैं।</p><p>उदाहरण: 4³ = 4 × 4 × 4 = 64</p><p>Perfect square ऐसी संख्या है जो किसी whole number का square हो।</p><p>Perfect cube ऐसी संख्या है जो किसी whole number का cube हो।</p><p>Square numbers: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100</p><p>Cube numbers: 1, 8, 27, 64, 125, 216</p>`,
+"Power Play":`<h3>2. Power Play</h3><p>Power किसी संख्या के repeated multiplication को छोटा करके लिखने का तरीका है।</p><p>2 × 2 × 2 × 2 = 2⁴</p><p>यहाँ 2 base और 4 exponent/power है।</p><p>10² = 100</p><p>10³ = 1000</p>`,
+"A Story of Numbers":`<h3>3. A Story of Numbers</h3><p>Numbers का उपयोग counting, measurement और calculations के लिए होता है।</p><p>Natural numbers: 1, 2, 3, 4, ...</p><p>Whole numbers: 0, 1, 2, 3, ...</p><p>Integers: ..., −3, −2, −1, 0, 1, 2, 3, ...</p><p>Prime number के केवल दो factors होते हैं: 1 और स्वयं संख्या।</p><p>Composite number के दो से अधिक factors होते हैं।</p><p>1 न prime है और न composite।</p>`,
+"Quadrilaterals":`<h3>4. Quadrilaterals</h3><p>Quadrilateral एक closed shape है जिसमें 4 sides और 4 angles होते हैं।</p><ul><li>Square</li><li>Rectangle</li><li>Parallelogram</li><li>Rhombus</li><li>Trapezium</li></ul><p>किसी quadrilateral के सभी interior angles का sum 360° होता है।</p>`,
+"Number Play":`<h3>5. Number Play</h3><p>2 से divisible number का last digit 0, 2, 4, 6 या 8 होता है।</p><p>5 से divisible number का last digit 0 या 5 होता है।</p><p>10 से divisible number का last digit 0 होता है।</p><p>3 और 9 से divisibility check करने के लिए digits का sum देखते हैं।</p>`,
+"We Distribute, Yet Things Multiply":`<h3>6. We Distribute, Yet Things Multiply</h3><p><b>Distributive property:</b></p><p>a × (b + c) = a × b + a × c</p><p>5 × (10 + 2) = 5 × 10 + 5 × 2 = 60</p>`,
+"Proportional Reasoning–1":`<h3>7. Proportional Reasoning–1</h3><p>Ratio दो quantities की तुलना करता है।</p><p>उदाहरण: 2 apples और 4 apples का ratio 2:4 = 1:2 है।</p><p>Unitary method में पहले 1 unit का value निकाला जाता है।</p><p>5 pens = ₹50, 1 pen = ₹10, 8 pens = ₹80</p>`};
+const englishChapters={
+"The Wit that Won Hearts":`<h3>1. The Wit that Won Hearts</h3><p>यह lesson intelligence, wit और presence of mind के महत्व को दिखाता है।</p><p><b>Message:</b> अपनी बुद्धि का उपयोग अच्छे उद्देश्य के लिए करना चाहिए।</p>`,
+"A Concrete Example":`<h3>2. A Concrete Example</h3><p>यह lesson किसी विचार को वास्तविक उदाहरण के माध्यम से समझने के महत्व पर आधारित है।</p><p>Practical examples किसी concept को आसानी से समझने में मदद करते हैं।</p>`,
+"Wisdom Paves the Way":`<h3>3. Wisdom Paves the Way</h3><p>इस lesson में wisdom और सही decision-making के महत्व पर जोर दिया गया है।</p>`,
+"A Tale of Valour":`<h3>4. A Tale of Valour: Major Somnath Sharma and the Battle of Badgam</h3><p>Major Somnath Sharma भारतीय सेना के एक वीर सैनिक थे।</p><p>Battle of Badgam में उन्होंने courage और dedication दिखाया।</p>`,
+"Somebody's Mother":`<h3>5. Somebody's Mother</h3><p>यह कविता एक वृद्ध महिला और उसकी सहायता करने वाले बच्चे के बारे में है।</p>`,
+"Verghese Kurien":`<h3>6. Verghese Kurien — I Too Had a Dream</h3><p>Verghese Kurien भारत के dairy cooperative movement से जुड़े महत्वपूर्ण व्यक्ति थे।</p>`,
+"The Case of the Fifth Word":`<h3>7. The Case of the Fifth Word</h3><p>यह lesson mystery और investigation से जुड़ा है।</p>`,
+"The Magic Brush of Dreams":`<h3>8. The Magic Brush of Dreams</h3><p>यह lesson imagination, dreams और creativity की शक्ति को दर्शाता है।</p>`,
+"Spectacular Wonders":`<h3>9. Spectacular Wonders</h3><p>यह lesson दुनिया और प्रकृति के अद्भुत wonders के बारे में curiosity पैदा करता है।</p>`,
+"The Cherry Tree":`<h3>10. The Cherry Tree</h3><p><b>Author:</b> Ruskin Bond</p><p>Rakesh एक cherry seed लगाता है और उसकी देखभाल करता है।</p>`,
+"Harvest Hymn":`<h3>11. Harvest Hymn</h3><p>यह poem harvest और nature के महत्व से जुड़ी है।</p>`,
+"Waiting for the Rain":`<h3>12. Waiting for the Rain</h3><p>यह lesson बारिश की प्रतीक्षा और उसके महत्व से संबंधित है।</p>`,
+"Feathered Friend":`<h3>13. Feathered Friend</h3><p>यह lesson birds और उनके behaviour के प्रति curiosity पैदा करता है।</p>`,
+"Magnifying Glass":`<h3>14. Magnifying Glass</h3><p>Magnifying glass छोटी चीजों को बड़ा करके देखने में मदद करता है।</p>`,
+"Bibha Chowdhuri":`<h3>15. Bibha Chowdhuri: The Beam of Light that Lit the Path for Women in Indian Science</h3><p>Bibha Chowdhuri भारत की महत्वपूर्ण महिला scientists में से एक थीं।</p>`};
+const hindiChapters={
+"स्वदेश":`<h3>1. स्वदेश</h3><p>इस पाठ में अपने देश के प्रति प्रेम और देश के महत्व को बताया गया है।</p>`,
+"दो गौरैया":`<h3>2. दो गौरैया</h3><p>इस पाठ में गौरैयों के माध्यम से प्रकृति और मनुष्य के संबंध को दिखाया गया है।</p>`,
+"एक आशीर्वाद":`<h3>3. एक आशीर्वाद</h3><p>यह पाठ आशीर्वाद और शुभकामनाओं के महत्व को समझाता है।</p>`,
+"हरिद्वार":`<h3>4. हरिद्वार</h3><p>इस पाठ में हरिद्वार के प्राकृतिक, धार्मिक और सांस्कृतिक महत्व का वर्णन किया गया है।</p>`,
+"कबीर के दोहे":`<h3>5. कबीर के दोहे</h3><p>कबीर के दोहों में जीवन की सच्चाई, अच्छे व्यवहार और सही ज्ञान का महत्व बताया गया है।</p>`,
+"एक टोकरी भर मिट्टी":`<h3>6. एक टोकरी भर मिट्टी</h3><p>इस कहानी में मानवता, संवेदना और भूमि के महत्व को दिखाया गया है।</p>`,
+"मत बाँधो":`<h3>7. मत बाँधो</h3><p>यह पाठ स्वतंत्रता और खुले विचारों के महत्व को सामने रखता है।</p>`,
+"नए मेहमान":`<h3>8. नए मेहमान</h3><p>इस पाठ में नए मेहमानों के आने से घर के वातावरण में होने वाले बदलाव को प्रस्तुत किया गया है।</p>`,
+"आदमी का अनुपात":`<h3>9. आदमी का अनुपात</h3><p>यह पाठ मनुष्य के वास्तविक मूल्य और उसके बाहरी रूप या धन के बीच अंतर समझाता है।</p>`,
+"तरुण के स्वप्न":`<h3>10. तरुण के स्वप्न</h3><p>यह पाठ युवाओं के सपनों, उत्साह और भविष्य को बेहतर बनाने की इच्छा पर केंद्रित है।</p>`};
+function showSubject(subject){const chapterBox=document.getElementById("chapterButtons"),title=document.getElementById("subjectTitle"),notes=document.getElementById("notes");let chapters={};if(subject==='Maths'){chapters=mathsChapters;title.innerText='📐 Maths — Chapters'}else if(subject==='English'){chapters=englishChapters;title.innerText='📖 English — Poorvi — Chapters'}else{chapters=hindiChapters;title.innerText='🪔 Hindi — Malhar — Chapters'}chapterBox.innerHTML='';Object.keys(chapters).forEach(chapter=>{const button=document.createElement('button');button.innerText=chapter;button.onclick=()=>{notes.innerHTML=chapters[chapter];window.scrollTo({top:document.querySelector('.notes').offsetTop,behavior:'smooth'})};chapterBox.appendChild(button)});notes.innerHTML='<p style="text-align:center;">ऊपर से कोई Chapter चुनें।</p>'}
+</script>
+</body>
+</html>
